@@ -5,6 +5,8 @@ const handleClientException = (res, e) => {
 
     if(e.name==='ValidationError') { res.status(403) }
     else { res.status(500) }
+
+    res.json({ error:e.message });
 }
 
 module.exports = handleClientException;

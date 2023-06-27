@@ -27,9 +27,6 @@ const userById = async (user_id) => {
 }
 
 const login = async (user_email, user_password) => {
-    console.log(user_email)
-    console.log(user_password)
-
     await db.verifyConection();
     let user = await User.findOne({ email:user_email, password: user_password });
     if(user == null) throw new EntityNotFoundException("Email and Password don't match");
