@@ -3,16 +3,34 @@ const User = require("../../db/Collections/User");
 const tokenManager = require("../auth/tokenManager");
 
 const EntityNotFoundException = require("../exceptions/entityNotFoundException");
+const ClientException = require("../exceptions/clientException");
 
 const create = async (new_user) => {
     console.log(`[userService] starting user creation for ${new_user.name || new_user.email} `);
+    try{
 
-    await User.validate(new_user);
-    await db.verifyConection();
-    let user = await User.create(new_user);
-    console.log(`[userService] Sucessfully created ${user.name}`);
+        await User.validate(new_user);
+        await db.verifyConection();
 
-    user.token = tokenManager.tokenFromUserId( user['_id'] );
+        let user = await User.create(new_user);
+        console.log(`[userService] Sucessfully created ${user.name}`);
+        
+        user.token = tokenManager.tokenFromUserId( user['_id'] );
+
+    }catch(e){
+
+        if(e.code == 11000){
+            if(e.message.includes("email")){
+                throw new ClientException("email already exist");
+
+            }
+            else if(e.message.includes("name")){
+                throw new ClientException("name already exist");
+            }
+        }
+        throw new ClientException(e.message);
+    }
+
     return user;
 }
 

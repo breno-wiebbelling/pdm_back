@@ -39,6 +39,7 @@ router.delete('/', userAuthenticator, async (req, res, next) => {
 });
 
 router.post('/login', async (req, res) => {
+    console.log(req.body)
     try{
         console.log(req.body)
         res.json( await userService.login(req.body.email, req.body.password) )
