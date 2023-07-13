@@ -16,6 +16,7 @@ const create = async (new_user) => {
         console.log(`[userService] Sucessfully created ${user.name}`);
         
         user.token = tokenManager.tokenFromUserId( user['_id'] );
+        return user;
 
     }catch(e){
 
@@ -30,8 +31,6 @@ const create = async (new_user) => {
         }
         throw new ClientException(e.message);
     }
-
-    return user;
 }
 
 const userById = async (user_id) => {
