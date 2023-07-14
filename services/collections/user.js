@@ -15,9 +15,7 @@ const create = async (new_user) => {
         let user = await User.create(new_user);
         console.log(`[userService] Sucessfully created ${user.name}`);
         
-        user.token = tokenManager.tokenFromUserId( user['_id'] );
-        return user;
-
+        return { user, token: tokenManager.tokenFromUserId( user['_id'] )};
     }catch(e){
 
         if(e.code == 11000){
