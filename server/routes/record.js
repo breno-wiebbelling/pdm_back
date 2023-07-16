@@ -8,16 +8,17 @@ const handleClientException = require('../../services/exceptions/handleClientExc
 router.post('/', userAuthenticator, async (req, res) => {
     try{
         console.log(req.body)
-        res.json(
-            await recordService.create({
-                id_creator: req.body.user_id,
-                name: req.body.name,
-                type: req.body.type,
-                date: req.body.date,
-                amount: req.body.amount,
-                description: req.body.description
-            })
-        )
+        res.json({
+            "record": 
+                await recordService.create({
+                    id_creator: req.body.user_id,
+                    name: req.body.name,
+                    type: req.body.type,
+                    date: req.body.date,
+                    amount: req.body.amount,
+                    description: req.body.description
+                })
+        })
     }
     catch(e){
         handleClientException(res, e);
@@ -36,7 +37,9 @@ router.get('/:month/:year', userAuthenticator, async (req, res, next) => {
 router.patch('/', userAuthenticator, async (req, res, next) => {
     try{
         console.log(rec.body)
-        res.json( await recordService.update(req.body.user_id, req.body.record_update) )
+        res.json({
+            "record": await recordService.update(req.body.user_id, req.body.record_update) 
+        })
     }
     catch(e){
         handleClientException(res, e);
@@ -46,7 +49,9 @@ router.patch('/', userAuthenticator, async (req, res, next) => {
 router.delete('/:rec_id', userAuthenticator, async (req, res, next) => {
     try{
         console.log(rec.body)
-        res.json( await recordService.deleteRecord(req.params.rec_id, req.body.user_id) );
+        res.json( {
+            "record": await recordService.deleteRecord(req.params.rec_id, req.body.user_id) 
+        });
     }
     catch(e){
         handleClientException(res, e);
