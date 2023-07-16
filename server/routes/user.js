@@ -31,9 +31,7 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try{
-        res.json({
-            user:await userService.login(req.body.email, req.body.password) 
-        })
+        res.json(await userService.login(req.body.email, req.body.password))
     }
     catch (e) {
         handleClientException(res, e)
