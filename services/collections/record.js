@@ -35,4 +35,12 @@ const findByMonthAndYear = async (month, year, user_id) => {
     })
 }
 
-module.exports = {create, update, findByMonthAndYear, findById}
+const deleteRecord = async ( record_id, user_id ) => {
+    await db.verifyConection();
+    return Record.deleteOne({
+        _id: record_id,
+        id_creator: user_id
+    })
+}
+
+module.exports = {create, update, findByMonthAndYear, findById, deleteRecord}
