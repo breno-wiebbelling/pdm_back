@@ -15,7 +15,7 @@ const create = async ( new_record ) => {
 const update = async ( user_id, newRec ) => {
     console.log(`Starting record update`)
 
-    await Record.validate(new_record);
+    await Record.validate(newRec);
     await db.verifyConection();
 
     let updated_record = await Record.findOneAndUpdate({ _id:newRec['_id'], id_creator:user_id }, newRec)
