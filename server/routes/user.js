@@ -29,15 +29,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.delete('/', userAuthenticator, async (req, res, next) => {
-    try{
-        res.json( await userService.remove(req.body.email, req.body.password, req.body.user_id) )
-    }
-    catch(e){
-        handleClientException(res, e);
-    }
-});
-
 router.post('/login', async (req, res) => {
     console.log(req.body)
     try{

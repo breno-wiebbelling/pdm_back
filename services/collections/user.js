@@ -69,4 +69,4 @@ const updatePassword = async (user_id, user_email, prev_pass, new_pass) => {
     return user != null
 }
 
-module.exports = { create, login, remove, userById, updateCredentials, updatePassword };
+module.exports = { create, login, userById, updateCredentials, updatePassword };
