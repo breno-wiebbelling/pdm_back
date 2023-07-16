@@ -31,7 +31,8 @@ const findById = async (record_id, user_id) => {
 }
 
 const findByMonthAndYear = async (month, year, user_id) => {
-
+    console.log(month);
+    console.log(year);
     await db.verifyConection();
     return Record.find({
         id_creator:user_id,
