@@ -38,6 +38,9 @@ const findByMonthAndYear = async (month, year, user_id) => {
     let lte = `${ (month == 12) ? parseInt(year)-1 : year }-${ (month == 12) ? 12 : parseInt(month)+1 }-01`
     await db.verifyConection();
 
+    console.log(gte);
+    console.log(lte);
+
     return Record.find({
         id_creator:user_id,
         date: {
