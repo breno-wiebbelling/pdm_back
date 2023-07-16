@@ -12,9 +12,9 @@ const create = async ( new_record ) => {
     return saved_record["_id"];
 }
 
-const update = async ( user_id, rec_id, newRec ) => {
+const update = async ( user_id, newRec ) => {
     await db.verifyConection();
-    return await Record.findOneAndUpdate({ _id:rec_id, id_creator:user_id }, newRec)
+    return await Record.findOneAndUpdate({ _id:newRec['_id'], id_creator:user_id }, newRec)
 }
 
 const findById = async (record_id, user_id) => {

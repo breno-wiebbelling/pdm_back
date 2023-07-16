@@ -36,7 +36,17 @@ router.get('/:month/:year', userAuthenticator, async (req, res, next) => {
 router.patch('/', userAuthenticator, async (req, res, next) => {
     try{
         res.json({
-            "record": await recordService.update(req.body.user_id, req.body.record_update) 
+            "record": await recordService.update(
+                req.body.user_id, 
+                {
+                    '_id':  req.body.record_id,
+                    'name': req.body.record_name, 
+                    'type': req.body.record_type,
+                    'amount': req.body.record_amount, 
+                    'date':   req.body.record_date,
+                    'description': req.body.record_description, 
+                }
+            ) 
         })
     }
     catch(e){
