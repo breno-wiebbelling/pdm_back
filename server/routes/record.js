@@ -48,7 +48,6 @@ router.patch('/', userAuthenticator, async (req, res, next) => {
 
 router.delete('/:rec_id', userAuthenticator, async (req, res, next) => {
     try{
-        console.log(rec.body)
         res.json( {
             "record": await recordService.deleteRecord(req.params.rec_id, req.body.user_id) 
         });
