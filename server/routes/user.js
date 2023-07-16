@@ -30,9 +30,7 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    console.log(req.body)
     try{
-        console.log(req.body)
         res.json({
             user:await userService.login(req.body.email, req.body.password) 
         })
@@ -43,9 +41,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.patch('/credentials', userAuthenticator, async (req, res, next) => {
-    console.log(req.body)
     try{
-        console.log(req.body)
         res.json({
             user: await userService.updateCredentials(
                 req.body.user_id, 
@@ -61,9 +57,7 @@ router.patch('/credentials', userAuthenticator, async (req, res, next) => {
 })
 
 router.patch('/password', userAuthenticator, async (req, res, next) => {
-    console.log(req.body)
     try{
-        console.log(req.body)
         res.json({
             user: await userService.updateCredentials(
                 req.body.user_id, 

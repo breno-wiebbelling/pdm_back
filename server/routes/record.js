@@ -7,7 +7,6 @@ const handleClientException = require('../../services/exceptions/handleClientExc
 
 router.post('/', userAuthenticator, async (req, res) => {
     try{
-        console.log(req.body)
         res.json({
             "record": 
                 await recordService.create({
@@ -36,7 +35,6 @@ router.get('/:month/:year', userAuthenticator, async (req, res, next) => {
 
 router.patch('/', userAuthenticator, async (req, res, next) => {
     try{
-        console.log(rec.body)
         res.json({
             "record": await recordService.update(req.body.user_id, req.body.record_update) 
         })
