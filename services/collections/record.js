@@ -37,7 +37,7 @@ const findByMonthAndYear = async (month, year, user_id) => {
         id_creator:user_id,
         date: {
             $gte: `${year}-${month}-01`,
-            $lte: `${year}-${parseInt(month)+1}-01`
+            $lte: `${year}-${parseInt(month)}-01`
         }
     })
 }
