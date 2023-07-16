@@ -49,4 +49,36 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.patch('/credentials', userAuthenticator, async (req, res, next) => {
+    console.log(req.body)
+    try{
+        console.log(req.body)
+        res.json( await userService.updateCredentials(
+            req.body.user_id, 
+            req.body.name,
+            req.body.email,
+            req.body.password
+        ))
+    }
+    catch (e) {
+        handleClientException(res, e)
+    }
+})
+
+router.patch('/password', userAuthenticator, async (req, res, next) => {
+    console.log(req.body)
+    try{
+        console.log(req.body)
+        res.json( await userService.updateCredentials(
+            req.body.user_id, 
+            req.body.email,
+            req.body.password,
+            req.body.new_password
+        ))
+    }
+    catch (e) {
+        handleClientException(res, e)
+    }
+})
+
 module.exports = router;

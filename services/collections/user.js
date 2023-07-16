@@ -47,7 +47,7 @@ const login = async (user_email, user_password) => {
     return { user, token: tokenManager.tokenFromUserId( user['_id'] )};
 }
 
-const updateNameOrEmail = async (user_id, new_username, new_email, given_password) => {
+const updateCredentials = async (user_id, new_username, new_email, given_password) => {
     await db.verifyConection();
     
     let user = await User.findOneAndUpdate(
@@ -58,4 +58,15 @@ const updateNameOrEmail = async (user_id, new_username, new_email, given_passwor
     return user != null
 }   
 
-module.exports = { create, login, remove, userById };
+const updatePassword = async (user_id, user_email, prev_pass, new_pass) => {
+    await db.verifyConection();
+    
+    let user = await User.findOneAndUpdate(
+        { _id:user_id, email: user_email, password: prev_pass }, 
+        { password: new_pass }
+    )
+
+    return user != null
+}
+
+module.exports = { create, login, remove, userById, updateCredentials, updatePassword };
