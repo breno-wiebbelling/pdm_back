@@ -40,6 +40,7 @@ router.patch('/', userAuthenticator, async (req, res, next) => {
                 req.body.user_id, 
                 {
                     '_id':  req.body.record_id,
+                    'id_creator':  req.body.user_id,
                     'name': req.body.record_name, 
                     'type': req.body.record_type,
                     'amount': req.body.record_amount, 
