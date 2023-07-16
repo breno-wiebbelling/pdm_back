@@ -26,7 +26,7 @@ router.post('/', userAuthenticator, async (req, res) => {
 
 router.get('/:month/:year', userAuthenticator, async (req, res, next) => {
     try{
-        res.json( await recordService.findByMonthAndYear(req.params.month, req.params.year, req.body.user_id) )
+        res.json( { "records": await recordService.findByMonthAndYear(req.params.month, req.params.year, req.body.user_id) })
     }
     catch(e){
         handleClientException(res, e);
