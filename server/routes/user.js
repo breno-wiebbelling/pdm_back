@@ -16,13 +16,13 @@ router.get('/', userAuthenticator, async (req, res, next) => {
 
 router.post('/', async (req, res) => {
     try{
-        res.json({
-            user: await userService.create({
+        res.json( 
+            await userService.create({
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password
             })
-        })
+        );
     }
     catch(e){
         handleClientException(res, e);
