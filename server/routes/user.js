@@ -57,11 +57,11 @@ router.patch('/credentials', userAuthenticator, async (req, res, next) => {
 router.patch('/password', userAuthenticator, async (req, res, next) => {
     try{
         res.json({
-            user: await userService.updateCredentials(
-                req.body.user_id, 
-                req.body.email,
+            user: await userService.updatePassword(
+                req.body.user_id,
                 req.body.password,
-                req.body.new_password)
+                req.body.new_password
+            )
         })
     }
     catch (e) {
