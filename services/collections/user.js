@@ -50,10 +50,12 @@ const login = async (user_email, user_password) => {
 const updateCredentials = async (user_id, new_username, new_email, given_password) => {
     await db.verifyConection();
     
-    let user = await User.updateOne(
+    let user = await User.findOneAndUpdate(
         { _id:user_id, password: given_password }, 
         {email: new_email, name: new_username}
     )
+
+    if(user == null) throw new EntityNotFoundException("Senha incorreta");
 
     return user;
 }   
