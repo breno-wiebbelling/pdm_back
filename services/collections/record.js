@@ -31,23 +31,19 @@ const findById = async (record_id, user_id) => {
 }
 
 const findByMonthAndYear = async (month, year, user_id) => {
-    console.log(month);
-    console.log(year);
-    //07/2023
-    //
     
-    let lte = `${year}-${ (month == 12) ? 12 : parseInt(month) }-01`
-    let gte = `${ (month == 12) ? parseInt(year)+1 : year }-${ (month == 12) ? 1 : parseInt(month)+1 }-01`
+    let from = `${year}-${ (month == 12) ? 12 : parseInt(month) }-01`
+    let until = `${ (month == 12) ? parseInt(year)+1 : year }-${ (month == 12) ? 1 : parseInt(month)+1 }-01`
     await db.verifyConection();
 
-    console.log(lte);
-    console.log(gte);
+    console.log(from);
+    console.log(until);
 
     return Record.find({
         id_creator:user_id,
         date: {
-            $lte: lte,
-            $gte: gte
+            $gte: from,
+            $lte: until
         }
     })
 }
