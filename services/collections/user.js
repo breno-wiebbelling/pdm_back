@@ -50,7 +50,7 @@ const login = async (user_email, user_password) => {
 const updateCredentials = async (user_id, new_username, new_email, given_password) => {
     await db.verifyConection();
     
-    let user = await User.findOneAndUpdate(
+    let user = await User.updateOne(
         { _id:user_id, password: given_password }, 
         {email: new_email, name: new_username}
     )
@@ -61,7 +61,7 @@ const updateCredentials = async (user_id, new_username, new_email, given_passwor
 const updatePassword = async (user_id, user_email, prev_pass, new_pass) => {
     await db.verifyConection();
     
-    let user = await User.findOneAndUpdate(
+    let user = await User.updateOne(
         { _id:user_id, email: user_email, password: prev_pass }, 
         { password: new_pass }
     )
