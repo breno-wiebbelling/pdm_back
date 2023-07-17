@@ -48,16 +48,32 @@ const login = async (user_email, user_password) => {
 }
 
 const updateCredentials = async (user_id, new_username, new_email, given_password) => {
-    await db.verifyConection();
-    
-    let user = await User.findOneAndUpdate(
-        { _id:user_id, password: given_password }, 
-        {email: new_email, name: new_username}
-    )
+    try{
 
-    if(user == null) throw new EntityNotFoundException("Senha incorreta");
+        await db.verifyConection();
+        
+        
+        let user = await User.findOneAndUpdate(
+            { _id:user_id, password: given_password }, 
+            {email: new_email, name: new_username}
+        )
 
-    return user;
+        if(user == null) throw new EntityNotFoundException("Senha incorreta");
+
+        return user;
+
+    }catch(e){
+        if(e.code == 11000){
+            if(e.message.includes("email")){
+                throw new ClientException("Email já registrado");
+
+            }
+            else if(e.message.includes("name")){
+                throw new ClientException("Nome já registrado");
+            }
+        }
+        throw new ClientException(e.message);
+    }
 }   
 
 const updatePassword = async (user_id, user_email, prev_pass, new_pass) => {
