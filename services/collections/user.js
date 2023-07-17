@@ -55,7 +55,7 @@ const updateCredentials = async (user_id, new_username, new_email, given_passwor
         {email: new_email, name: new_username}
     )
 
-    return user != null
+    return user;
 }   
 
 const updatePassword = async (user_id, user_email, prev_pass, new_pass) => {
@@ -66,7 +66,7 @@ const updatePassword = async (user_id, user_email, prev_pass, new_pass) => {
         { password: new_pass }
     )
 
-    return user != null
+    return user;
 }
 
 module.exports = { create, login, userById, updateCredentials, updatePassword };
